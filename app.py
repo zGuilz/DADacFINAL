@@ -1,8 +1,15 @@
 from flask import Flask, jsonify, request
-from routes import cadastrar_time, select_time_favorito
+from routes import cadastrar_time, select_time_favorito, deletar_time_favorito
 
 
 app = Flask(__name__)
+
+@app.route('/deletar/time-favorito', methods=['DELETE'])
+def deletar_time():
+    # nome_time = request.args['team_name']
+    body = request.get_json()
+    return jsonify(deletar_time_favorito(body)), 200
+
 
 @app.route('/cadastrar/time-favorito', methods=['POST'])
 def request_time():

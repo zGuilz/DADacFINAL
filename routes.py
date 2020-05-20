@@ -30,7 +30,7 @@ def cadastrar_time(team_name):
                    body['team']['founded'], body['venue']['name'], body['venue']['capacity']])
     connection.commit()
     connection.close()
-    return "Time escolhido com sucesso com sucesso !!"
+    return "Time escolhido com sucesso!!"
 
 
 def get_team(team_name):
@@ -64,3 +64,16 @@ def select_time_favorito(time):
     connection.commit()
     connection.close()
     return dic_time
+
+
+def deletar_time_favorito(time):
+    connection = sqlite3.connect('db.db')
+    cursor = connection.cursor()
+    ddl_sql = """
+    DELETE FROM TIME
+    WHERE NOME = ?
+    """
+    cursor.execute(ddl_sql, [time['nome']])
+    connection.commit()
+    connection.close()
+    return "Time Excluído com Sucesso"
